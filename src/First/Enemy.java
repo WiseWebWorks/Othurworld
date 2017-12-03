@@ -10,14 +10,18 @@ package First;
  */
 
 public class Enemy {
-	String nameE;
-	int HPE;
-	String attackE; 
+	String name;
+	int hp;
+	String attack; 
 	//sparing, attacks, and dialogue are going to be a bit harder
-	String spriteE = "";
-	int xE;
-	int yE;
-	spriteE.draw(g,xE,yE,400,400);
+	Sprite sprite;
+	
+	Enemy(int hp, String name, String attack, Sprite sprite) {
+		this.hp = hp;
+		this.name= name;
+		this.attack = attack;
+		this.sprite = sprite;
+	}
 }
 
 
