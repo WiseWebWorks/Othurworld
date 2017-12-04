@@ -10,10 +10,13 @@ package First;
  */
 
 public class Attack {
- int atkX;//the attack's Y
- int atkY;//the attack's x
- int atkE;//the attack's element; 0 earth 1 fire 2 air 3 water
- int ATK;//the attack's damage dealt
-
- 
+	int element;//the attack's element; 0 earth 1 fire 2 air 3 water
+	int attack;//the attack's damage dealt
+	Sprite sprite;
+	
+	Attack(int element, int attack, Sprite sprite) {
+		this.element = element;
+		this.attack = attack;
+		this.sprite = sprite;
+	}
 }
