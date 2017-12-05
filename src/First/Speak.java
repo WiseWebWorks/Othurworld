@@ -30,8 +30,6 @@ public class Speak {
 	 * @param text
 	 */
 	static void speak(Graphics g, String[] text) {
-		check[0] = talkFrame == text.length - 1 && talking == text[talkFrame].length();//end speach
-		check[1] = talking == text[talkFrame].length() && talkFrame < text.length - 1;//next frame
 		g.setFont(Main.small);
 		
 		if(speaking == false && talkFrame != text.length - 1) {
@@ -41,6 +39,9 @@ public class Speak {
 			Main.INSTANCE.moving = false;
 			Main.INSTANCE.runFrame = 0;
 		}
+		
+		check[0] = talkFrame == text.length - 1 && talking == text[talkFrame].length();//end speach
+		check[1] = talking == text[talkFrame].length() && talkFrame < text.length - 1;//next frame
 		
 		if(speaking == false && endCount > 16 && Main.INSTANCE.keys[90]) {
 			talkFrame = 0;

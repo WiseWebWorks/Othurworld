@@ -429,18 +429,18 @@ public class Main extends Applet implements Runnable, KeyListener {
 			world.draw(g, 0, 0);//draw the background
 			World.draw(g);//debug
 			if(world == ortni) {
-			if(Main.INSTANCE.sOEvents == GameSequence.Start) {
-			garda.draw(g, 200, 20);
-			gardb.draw(g, 170, 20);
-			}
-			oldguy.draw(g, 81, 297);
-			cat.draw(g, 32, 332);
+				if(save.sOEvents == GameSequence.Start) {
+					garda.draw(g, 200, 20);
+					gardb.draw(g, 170, 20);
+				}
+				oldguy.draw(g, 81, 297);
+				cat.draw(g, 32, 332);
 			}
 			if(world == ortni2) {
-			turtlestack.draw(g, 28, 20);
-			turtlestack.draw(g, 18, 23);
-			turtlestack.draw(g, 22, 22);
-			turtleman.draw(g, 85, 34);
+				turtlestack.draw(g, 28, 20);
+				turtlestack.draw(g, 18, 23);
+				turtlestack.draw(g, 22, 22);
+				turtleman.draw(g, 85, 34);
 			}
 			drawPlayer(g);
 			g.translate(save.x - 100, save.y - 100);
@@ -450,7 +450,6 @@ public class Main extends Applet implements Runnable, KeyListener {
 			g.setColor(new Color(255, 255, 255));
 			mainSpeak(g);
 			Speak.waitSpeak();
-			System.out.println(Speak.endCount);
 		}
 		
 		if(menu == 4) {//name select

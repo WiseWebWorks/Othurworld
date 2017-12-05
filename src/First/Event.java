@@ -44,13 +44,17 @@ public class Event {
 	String[] talk;
 	
 	/**
+	 * Where a talking event takes you
+	 */
+	int type;
+	/**
 	 * Normal collide event
 	 * @param x
 	 * @param y
 	 * @param width
 	 * @param height
-	 * @param collide//true
-	 * @param eventNum//0
+	 * @param collide true for walls
+	 * @param eventNum 0 for walls
 	 */
 	Event(int x, int y, int width, int height, boolean collide, int eventNum) {//normal collide event
 		this.rect = new Rectangle(x, y, width, height);
@@ -67,19 +71,36 @@ public class Event {
 	 * @param y
 	 * @param width
 	 * @param height
-	 * @param activate//true if u must press z
+	 * @param activate true if you must press z
 	 * @param talk
-	 * @param type //whether it moves the plot on or not (2 or 3)
+	 */
+	Event(int x, int y, int width, int height, boolean activate, String[] talk) {//
+		this.rect = new Rectangle(x, y, width, height);
+		this.collide = false;
+		this.activate = activate;
+		this.eventNum = 2;
+		this.type = 0;
+		this.path = null;
+		this.xPath = 0;
+		this.yPath = 0;
+		this.talk = talk;
+	}
+	/**
+	 * Event that talks and then fires another event
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param activate
+	 * @param talk
+	 * @param type
 	 */
 	Event(int x, int y, int width, int height, boolean activate, String[] talk, int type) {//
 		this.rect = new Rectangle(x, y, width, height);
 		this.collide = false;
 		this.activate = activate;
-		if(type == 3 ) {
-		this.eventNum = type;
-		} else{
-		this.eventNum = 2;	
-		}
+		this.eventNum = 2;
+		this.type = type;
 		this.path = null;
 		this.xPath = 0;
 		this.yPath = 0;
@@ -146,25 +167,32 @@ public class Event {
 		this.yPath = yPath;
 	}
 	void run() {//sets this.event to the entire world's event (Also runs shortcut events like teleporting)
-		if(this.eventNum == 1) {
+		event = this.eventNum;
+		if(event == 1) {
 			Main.INSTANCE.save.area = this.path;//Makes you go to the path
 			Main.INSTANCE.save.x = this.xPath;
 			Main.INSTANCE.save.y = this.yPath;
 			Main.INSTANCE.updateNow = true;
 		}
-		if(this.eventNum == 2) {
+		if(event == 2) {
 			//Say this.talk[]
 			//Speak.speak(g, this.talk);
 			Main.INSTANCE.frameSpeak = true;
 			Main.INSTANCE.frameSpeakString = this.talk;
+			event = this.type;
 		}
-		if(this.eventNum == 3) {
-		 Main.INSTANCE.frameSpeak = true;
-		 Main.INSTANCE.frameSpeakString = this.talk;
-		 GameSequence gameSequence = GameSequence.Start;
-		 gameSequence = gameSequence.getNext();
+		if(event == 3) {
+			Main.INSTANCE.updateNow = true;
+			Main.INSTANCE.save.sOEvents = Main.INSTANCE.save.sOEvents.getNext();
 		}
-		event = this.eventNum;
+		
+		/*if(this.eventNum == 2) {
+			event = this.type;
+		}
+		if(event == 3) {
+			Main.INSTANCE.updateNow = true;
+			Main.INSTANCE.save.sOEvents = Main.INSTANCE.save.sOEvents.getNext();
+		}*/
 	}
 	
 	static int event = 0;
@@ -178,7 +206,7 @@ public class Event {
 			event = 0;
 		}
 		if(event == 3) {//making the plot continue by talking
-		event = 0;
+			event = 0;
 		}
 	}
 }
