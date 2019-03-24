@@ -1,6 +1,6 @@
 # Othurworld
 Welcome to Othurworld, the RPG game that stretches across "parallel" dimensions!
-Development may take a while, but we hope to have a demo by around 201~ or so.
+Development may take a while, but we hope to have a demo by around 202~ or so.
 ## Download
 Sorry, but the demo is not complete yet.
 To download Othurworld when it comes out, go [here](https://ufuueueuru.github.io/Othurworld/).
